@@ -1,0 +1,45 @@
+import java.util.*;
+import java.util.Scanner;
+// as it is a subsequence the char has two options either be in ans or not , so include it once and leave it once 
+
+public class Main{
+	public static ArrayList<String> getSubsequence(String s){
+
+		if(s.length()==0){
+			ArrayList<String> ba = new ArrayList<String>();
+			ba.add("");
+			return ba;
+		}
+		char fc = s.charAt(0);
+		String ss = s.substring(1);
+		ArrayList<String> sans=getSubsequence(ss);
+		ArrayList<String> ans = new ArrayList<String>();
+
+		//add first char to all ans
+		for(int i=0;i<sans.size();i++){
+			String words = sans.get(i);
+			String toadd = fc+words;
+			ans.add(toadd);
+		}
+
+		// copy ss in ans
+		for(int i=0;i<sans.size();i++){
+			String words = sans.get(i);
+			//String toadd = fc+words;
+			ans.add(words);
+		}
+		return ans;
+	}
+    public static void printSubsequence(String s) {
+
+		ArrayList<String> res =getSubsequence(s);
+		for(int i=0;i<res.size();i++){
+			System.out.print(res.get(i)+" ");
+		}
+    }
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        printSubsequence(s);
+    }
+}

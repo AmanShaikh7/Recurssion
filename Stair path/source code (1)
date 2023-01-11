@@ -1,0 +1,59 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	public static ArrayList<String> getStairPaths(int n){
+		if(n==0){
+			ArrayList<String> ba = new ArrayList<String>();
+			ba.add("");
+			return ba;
+		}
+		if(n<0){  // n is neagtive return empty list
+			ArrayList<String> ba = new ArrayList<String>();
+			return ba;
+		}
+		ArrayList<String> ans = new ArrayList<String>();
+		ArrayList<String> sans = getStairPaths(n-1);
+
+		//adding one in front of every string
+		//jump of 1
+		for(int i=0;i<sans.size();i++){
+			String takenOut = sans.get(i);
+			String TOadd = "1"+ takenOut;
+			ans.add(TOadd);
+		}
+
+		//adding two in front of strings
+		//jump of 2
+		 sans = getStairPaths(n-2);
+		for(int i=0;i<sans.size();i++){
+			String takenOut = sans.get(i);
+			String TOadd = "2"+takenOut;
+			ans.add(TOadd);
+		}
+
+		//adding 3 in front of strings
+		//jump of 3
+		 sans = getStairPaths(n-3);
+		for(int i=0;i<sans.size();i++){
+			String takenOut = sans.get(i);
+			String TOadd = "3"+takenOut;
+			ans.add(TOadd);
+		}
+		return ans;
+		
+	}
+    public static void printStairPaths(int n) {
+		ArrayList<String> res=getStairPaths(n);
+		for(int i=0;i<res.size();i++){
+			System.out.println(res.get(i));
+		}
+		
+    }
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        int n;
+        n = sc.nextInt();
+        printStairPaths(n);
+    }
+}
